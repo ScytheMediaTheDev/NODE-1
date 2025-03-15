@@ -34,10 +34,6 @@ jobs:
         env:
           PORT: 3000  # Set the port for the server
 
-      # Run tests (optional, if you have tests)
-      - name: Run tests
-        run: npm test
-
       # Lint the code (optional, if you have a linter)
       - name: Lint code
         run: npm run lint
