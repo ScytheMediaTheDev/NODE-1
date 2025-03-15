@@ -33,7 +33,7 @@ This project is a **Node.js** web application designed and developed by **Nyxon*
 ---
 
 ## File Structure
-
+```
 Nyxon-Dash/
 ├── logs/
 │ ├── combined.log
@@ -53,7 +53,7 @@ Nyxon-Dash/
 ├── README.md
 ├── server.js
 └── users.json
-
+```
 ---
 
 ## Installation
