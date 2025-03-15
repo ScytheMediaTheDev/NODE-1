@@ -1,4 +1,3 @@
-```markdown
 # Nyxon's Node.js Dashboard Project
 
 ---
