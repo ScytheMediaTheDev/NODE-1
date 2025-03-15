@@ -1,30 +1,47 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main  # Trigger workflow on push to the main branch
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main  # Trigger workflow on pull requests to the main branch
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+  build-and-run:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm install express body-parser express-session bcrypt uuid date-fns express-rate-limit express-validator winston chalk dotenv
-    - run: node server.js
+      # Check out the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16  # Use Node.js 16 (or the version your project requires)
+          cache: 'npm'      # Cache npm dependencies for faster builds
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run the server (optional, for testing)
+      - name: Run server
+        run: node server.js &
+        env:
+          PORT: 3000  # Set the port for the server
+
+      # Run tests (optional, if you have tests)
+      - name: Run tests
+        run: npm test
+
+      # Lint the code (optional, if you have a linter)
+      - name: Lint code
+        run: npm run lint
+
+      # Build the project (optional, if you have a build step)
+      - name: Build project
+        run: npm run build
