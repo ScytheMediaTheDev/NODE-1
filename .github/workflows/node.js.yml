@@ -33,7 +33,3 @@ jobs:
         run: node server.js &
         env:
           PORT: 3000  # Set the port for the server
-
-      # Build the project (optional, if you have a build step)
-      - name: Build project
-        run: npm run build
